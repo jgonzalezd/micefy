@@ -1,0 +1,24 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  content: MyText
+  conference_id: 
+  user_id: 
+
+two:
+  content: MyText
+  conference_id: 
+  user_id:
+
+# == Schema Information
+#
+# Table name: questions
+#
+#  id            :integer          not null, primary key
+#  content       :text
+#  conference_id :integer
+#  user_id       :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+

@@ -1,0 +1,417 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+es:
+  layouts:
+    application:
+      my_events: Mis Eventos
+      account: Mi cuenta
+      sign_out: Salir
+      edit: Editar
+    pages:
+      register_event: Crea tu evento
+      sign_in: Ingresa
+  views:
+    event_code_requests:
+      show:
+        title: Tu solicitud ha sido enviada!
+        request_sent_message: |
+          Muy pronto nuestro equipo se pondra en contacto contigo mediante tu correo electronico.
+          Si tienes alguna inquietud no dudes en contactarnos a:
+          Skype: jgonzalezd.sist
+          Celular: (+57) 300 384 3525
+          Email: support@micefy.com
+
+          Mientras te contactamos puedes continuar con la configuracion de tu evento.
+        back: « Regresar
+    organizers:
+      events:
+        index:
+          title: Mis Eventos
+          upcoming: Proximos
+          previous: Anteriores
+          current: Sucediendo ahora
+          drafts: Borradores
+          create_event: Crear nuevo evento
+          no_events: No tienes eventos para mostrar.
+          place:
+            label: Lugar
+            empty: Por definir.
+          event_date:
+            label: Date
+            from: From
+            to: to
+            empty: No date defined yet.
+        new:
+          title: Nuevo Evento
+          back: Volver
+        form:
+          general_info:
+            subtitle: "Información General"
+            name: "Nombre del evento:"
+            description: "Descripción:"
+            logo: Logotipo
+            map: Mapa de las locaciones
+          venues:
+            title: "Locaciones (Salones de conferencias y eventos)"
+            name: Nombre de locacion
+            address: Direccion/Ubicación
+            city: City
+            country: Country
+            add_new: Agregar una nueva locación
+          date:
+            title: Fechas del evento
+            start: Fecha de inicio
+            end: Fecha de finalizacion
+          indications:
+            subtitle: Indicaciones para los asistentes
+            content: Mensaje
+            kind:
+              label: Type
+              information: "Información"
+              warning: Advertencia
+              regulatory: Prohibición
+            delete: Eliminar
+            add_new: Agregar nueva
+          submit:
+            new: Crear evento
+            back: Cancelar y Volver
+            update: Guardar cambios
+            cancel: Cancelar
+        show:
+          information_subtitle: Informacion del evento
+          not_published: Este evento aun no ha sido publicado
+          publish_button: Publicar
+          request_token: No tienes un token? Haz click aqui para consegur uno.
+          logo:
+            placeholder_message: Subir Logotipo
+          current_conferences:
+            title: Conferencias actuales
+            present: "Presentación"
+            questions: Preguntas
+            no_conferences_msg: "Juumm! esto parece un descanso. En este momento no se esta llevando a cabo ninguna conferencia."
+          duration:
+            subtitle: Fecha
+            from: Desde el
+            to:  hasta el
+          description:
+            subtitle: "Descripción"
+          locations:
+            subtitle: Lugares asignados para el evento.
+            see_map: Ver mapa
+          twitter:
+            subtitle: Hashtag de Twitter
+            not_present: No has asignado ningun hashtag hasta el momento
+          indications:
+            subtitle: Indicaciones para los asistentes
+            not_present: No has agregado ninguna indicacion para los asistentes
+            information: "Información"
+            warning: Advertencia
+            regulatory: Prohibido
+          edit_button: "Editar información"
+          conferences_title: Lista de conferencias
+          not_conferences: No hay conferencias
+          conferences_list:
+            place:
+              label: Lugar
+              empty: No se ha asignado
+            date:
+              label: Fecha
+              empty: No se ha asignado
+              days:
+                zero: "%{start_time} a %{end_time}"
+                other: 'Desde el %{start_time} hasta el %{end_time}'
+          upcoming: Proximas
+          previous: Anteriores
+          drafts: Borradores
+          new: Agregar conferencia
+          back: Volver
+        edit:
+          title: Editar evento
+          back: Volver
+        conferences:
+          show:
+            start_presentation: "Empezar presentación"
+            need_presentation: "Necesita una presentación"
+            edit_button: "Editar información"
+            back: Volver
+            publish_to_present: "Debes publicar el evento para habilitar esta función."
+            general_information:
+              subtitle: "Información general"
+              location:
+                label: Lugar
+                empty: Pendiente de asignar
+              time:
+                label: Fecha y Hora
+                missing: "No se ha definido aún"
+              description:
+                label: "Descripción"
+                empty: "No hay descripción"
+            lecturers:
+              subtitle: Conferencista(s)
+              not_present: No has asignado ningun conferencista para esta conferencia
+              origin:
+                label: "País de origen"
+                not_present: 'No disponible, por favor considere Agregar esta información'
+              linkedin_url:
+                present: Ver perfil en LinkedIn
+                not_present: 'Este conferencista aun no tiene una cuenta de LinkedIn asociada, '
+                not_present_link_text: 'haz click aquí para agregarlo.'
+          new:
+            title: Nueva conferencia
+          edit:
+            title: "Editar información de la conferencia"
+            form:
+              general_information:
+                label: "Información General"
+                name: Nombre de la conferencia
+                description: Agrega una descripcion.
+                from: Desde
+                to: Hasta
+              location:
+                label: Lugar
+                empty: "Para poder seleccionar, debe asignar lugar(es) para el evento"
+              lecturers:
+                subtitle: Conferencistas
+                name: Nombre
+                description: "Descripción"
+                linkedin_url: Perfil en LinkedIn
+                country: "País"
+                delete: Quitar
+                add: Agregar conferencista
+              settings:
+                subtitle: Configuraciones
+                draft: Guardar como borrador
+                presentation_url: "URL de la presentación (Google Presentation, Microsoft Skydrive)"
+              submit:
+                new: Crear conferencia
+                update: Guardar cambios
+                cancel: Cancelar
+                back: Cancelar y Volver
+              modal:
+                title: Guardar como borrador?
+                message: "Falta la fecha/hora de inicio y/o terminacion de la conferencia para poder publicarla en la agenda. \n Deseas guardarla como borrador, o establecer las fechas?"
+                ok_button: Guardar
+                cancel_button: Establecer fechas
+          present:
+            title: "Iniciar presentación"
+            message_fail_html: Oh no! Al parecer <strong>no tienes instalada</strong> nuestra extension de Google Chrome.
+            message_success_html: "<strong>Que bien!</strong> Ya tienes nuestra extensión de Google Chrome instalada."
+            start_presentation_btn: "Empezar Presentación"
+            instructions_failure: "Pero no te preocupes es muy facil de instalar. Solo presiona \"Instalar\", y en la pagina que se abre busca el boton con el sigo más ( + Free ). Una vez instalada, recarga esta pagina y estaras listo para empezar a presentar."
+            install_btn: Instalar
+          questions:
+            title: Preguntas Realizadas por la Audiencia
+      confirmations:
+        new:
+          title: Instrucciones para re-envio de confirmación.
+      registrations:
+        new:
+          title: Registrarse como Organizador de Eventos
+          subtitle_part1: O si ya estás registrado,
+          link: ingresa aquí.
+          company_name: "Nombre de la empresa:"
+          email: "Email:"
+          password: "Contraseña:"
+          password_confirm: "Repita su contraseña:"
+          submit: Registrarme
+      mailer:
+        # confirmation_instructions:
+          # welcome: "Bienvenido,"
+          # text: Puedes confirmar..
+          # confirm_account: Confirmar cuenta.
+          reset_password_instructions:
+            greeting: "Hola,"
+            text: Has solicitado un link para reestablecer tu contraseña y lo puedes hacer en el siguiente link.
+            link: Cambiar mi contraseña
+            warning1: Si tu no solicitaste cambiar el password, por favor ignora este correo.
+            warning2: Tu contraseña no será cambiada hasta que accedas al link y crees una nueva contraseña.
+          unlock_instructions:
+            greeting: "Hola,"
+            text: Tu cuenta se ha bloqueado por un exesivo numero de intentos fallidos para loguearse.
+            text2: Haz click en el link de abajo para desbloquearla.
+            link: Desbloquear mi cuenta.
+      passwords:
+        edit:
+          title: Cambiar tu contraseña
+          new_pass: Nueva contraseña
+          confirm_pass: Repite tu contraseña
+          submit: Guardar
+      sessions:
+        new:
+          title: Ingresar como Organizador
+          email: "Correo Electronico:"
+          password: "Contraseña:"
+          remember_me: Recordarme
+          help: Ayuda
+          submit: Ingresar
+    users:
+      sessions:
+        new:
+          title: Iniciar sesion
+          subtitle_html: O haz click %{href} si eres Organizador
+          href_here: aqui
+          email: "Correo electronico"
+          password: "Contraseña"
+          remember_me: Recordarme
+          submit: Ingresar
+          help: Necesita ayuda?
+          new_account: Crea una cuenta gratis
+    pages:
+      landing:
+        hero:
+          title: Conferencias Interactivas
+          text: |
+            Aprovecha mejor tus conferencias y eventos.
+            Micefy hace las conferencias interactivas y los eventos un lugar lleno de oportunidades
+            para aprender, participar y con las personas que te interesa. Necesitas información sobre el evento?
+            no te preocupes Micefy tiene la informacion esencial para que no te pierdas y recibas actualizaciones
+            de ultimo minuto por si algo se presenta.
+        features:
+          feature_one:
+            title: Participa
+            text: |
+              Tienes una pregunta importante? Preguntale al experto. Te has preguntado lo que las demas personas tienen para decir?
+              Micefy permite la interaccion entre el publico y el conferencista en tiempo real
+            bullet_1: Haz preguntas al conferencista
+            bullet_2: Vota por las mejores preguntas
+            bullet_3: Toma notas de la conerencia
+            bullet_4: Publica tus opiniones del evento
+          feature_two:
+              title: Todo en un mismo sitio
+              text_1: |
+                No vuelvas a perder tus notas, contactos y memorias de tus conferencias. Mantenla toda
+                en un solo lugar que puedas consultar.
+              text_2: |
+                Micefy te ayuda a mantener toda esta informacion en la nube para que siempre la tengas
+                disponible. Seguro la vas a necesitar.
+          feature_three:
+              title: Conoce nuevas personas
+              text: |
+                Escribe tus intereses y relacionate con las personas que deseas conocer durante el evento.
+                Micefy facilita la comunicacion para que puedas optimizar tu lista de contactos
+        real-time:
+          title: Todas las diapositivas en tu tablet o movil
+          subtitle: en Tiempo Real!
+          text: |
+            Siempre nos pasa que algunas diapositivas son imposibles de leer desde donde estamos, y nos perdemos de
+            datos y analisis importantes, ahora puedes tener la presentación en tus manos, jamas volveras a perder
+            esos detalles y lo mejor, siempre podras volver a consultarlas. (Muy pronto estara disponible)
+        soon:
+          feature_1:
+            title: "Envia notificaciones de último minuto a los asistentes"
+            text: |
+              Lastimosamente no siempre sale todo como fue planeado, pero no te preocupes, ahora puedes avisar.
+              Micefy te permite enviar notificaciones en tiempo real a tus asistentes y mantenerlos informados acerca
+              de los cambios de ultimo minuto y mitigar el impacto negativo. (Muy pronto estara disponible)
+          feature_2:
+            title: Reportes y analisis del evento.
+            text_1: |
+              Descubre que tan satisfechos estan los asistentes con tu evento, los temas mas hablados
+              y los mayores "influenciadores" durante evento
+            text_2: |
+              Enterate de las cosas a las que necesitas prestar atencion para mantener a tu audiencia
+              enganchada con el evento y ofrecerles la mejor experiencia (Esta funcionalidad estara disponible muy pronto).
+        conference:
+          title: Todo Sobre el Evento
+        contact_us:
+          title: Contactanos
+          text: "Si tienes alguna inquietud o deseas mas información comunicate con nosotros"
+  time:
+    formats:
+      event_start_date_same_month: '%A %-d (%l:%M %p)'
+      event_end_date_same_month: '%A %-d (%l:%M %p) de %B de %Y'
+      event_different_month: '%A %-d (%l:%M %p) de %B de %Y'
+      conference_start_time_same_day: '%A %-d de %B de %l:%M %p'
+      conference_end_time_same_day: '%l:%M %p'
+      conference_start_time_different_day: '%A %-d de %B a las %l:%M %p'
+      conference_end_time_different_day: '%A %-d de %B a las %l:%M %p'
+  activerecord:
+    models:
+      conference: conferencia
+      event: evento
+      location: Lugar
+    attributes:
+      conference:
+        description: "La descripción"
+        start_at: La fecha de inicio
+        end_at: "La fecha de finalización"
+        name: El nombre
+      event:
+        name: El nombre del evento
+        description: "La descripción"
+        timezone: Debes seleccionar
+      locations:
+        name: El nombre del lugar
+        address: La direccion del lugar
+    errors:
+      template:
+        header:
+          one: "Un error impidió que esta información se guardara:"
+          other: "%{count} errores impidieron que esta información se guardara:"
+      models:
+        conference:
+          attributes:
+            description:
+              too_long: "contiene mas caracteres de los permitidos, máximo %{count} caracteres."
+            start_at:
+              earlier_than_event: "de la conferencia es anterior a la fecha inicio del evento. La fecha de la conferencia empieza en %{conference_start_at} y la del evento en %{event_start_at}."
+            end_at:
+              later_than_event: "de la conferencia es posterior a la fecha del evento. La fecha de la conferencia termina en %{conference_end_at} y la del evento en %{event_end_at}."
+        event:
+          attributes:
+            description:
+              too_long: "contiene mas caracteres de los permitidos, máximo %{count} caracteres."
+            name:
+              blank: no puede estar en blanco
+            timezone: 
+              blank: al menos un lugar para el evento
+        location:
+          attributes:
+            name:
+              blank: no puede estar en blanco
+            address:
+              blank: no puede estar en blanco
+  flash:
+    actions:
+      create:
+        notice: "{resource_name} ha sido creado satisfactoriamente"
+      update:
+        notice: "{resource_name} ha sido actualizado satisfactoriamente"
+      destroy:
+        notice: "{resource_name} ha sido eliminado satisfactoriamente"
+        alert: "{resource_name} no ha posido ser eliminado"
+      organizers:
+        events:
+          create: 
+            success: "Tu evento se creo correctamente, ahora empieza a crear la primera conferencia aquí"
+            failure: "Algo salio mal, probablemente olvidaste algun campo importante o enviaste vacio el formulario. Por favor intenta de nuevo."
+          update:
+            updated: "El evento ha sido actualizado satisfactoriamente."
+            not_updated: ""
+          publish:
+            exception: "Lo sentimos, ha ocurrido un error. Por favor refresque la pagina (oprimiendo la tecla F5) e intente de nuevo"
+            published: "El evento ha sido publicado correctamente"
+            unpublished: "El evento ha sido despublicado correctamente"
+            invalid_token: "El codigo usado para publicar el evento es invalido"
+            missing_dates: "Las fechas de inicio y final del evento son requeridas para publicar un evento"
+            unknown_action: "Esta accion no es valida."
+            code_already_used: "El token ingresado ha sido usado en otro evento."

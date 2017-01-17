@@ -1,0 +1,116 @@
+// Place all the styles related to the Events controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.action{
+  margin: 0 10px
+}
+
+.list-group-item{
+  border-left: 0px;
+  border-right: 0px;
+  border-top: 0px;
+}
+
+.list-group-item:last-child {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.bg-warning{
+  padding: 15px;
+  overflow: hidden;
+  p{
+    margin-top: 14px;
+  }
+}
+
+.title-with-controls{
+  display:inline;
+}
+.controls{
+  display:inline;
+}
+
+.event-record{
+  margin-left: 30px;
+}
+
+.map-selector{
+  margin-top: 22px;
+}
+
+.remove_nested_fields_link{
+  display: inline-block;
+  margin-top: 31px;
+}
+
+#map-canvas {
+  height: 400px;
+  margin: 0px;
+  padding: 0px;
+}
+#place-selector{
+  .modal-body{
+    min-height: 400px;
+  }
+}
+.controls {
+  margin-top: 16px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#pac-input {
+  top: 20px !important;
+  background-color: #fff;
+  padding: 0 11px 0 13px;
+  width: 300px;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  text-overflow: ellipsis;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+  margin-left: -1px;
+  padding-left: 14px;  /* Regular padding-left + 1. */
+
+}
+
+.pac-container {
+  font-family: Roboto;
+  background-color: #FFF;
+  z-index: 1032;
+  position: fixed;
+  display: inline-block;
+  float: left;
+}
+.modal{
+  z-index: 1031;
+}
+.modal-backdrop{
+  z-index: 1030;
+}​
+
+#type-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.event-title{
+  max-width: 70%
+}

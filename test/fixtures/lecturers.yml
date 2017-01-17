@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+  linkedin_url: MyString
+  country_id: 
+
+two:
+  name: MyString
+  description: MyText
+  linkedin_url: MyString
+  country_id:
+
+# == Schema Information
+#
+# Table name: lecturers
+#
+#  id           :integer          not null, primary key
+#  name         :string(255)
+#  description  :text
+#  linkedin_url :string(255)
+#  country_id   :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+

@@ -1,0 +1,163 @@
+<% context = 'views.organizers.events.conferences.edit.form'%>
+<%= form_for(@conference, url: polymorphic_path([:organizers, @conference], event_id: @event.id)) do |f| %>
+  <% if @conference.errors.any? %>
+    <div id="error_explanation">
+      <h3 class="alert alert-danger">
+        <% if @conference.errors.count == 1 %>
+          <%= t('activerecord.errors.template.header.one') %>
+        <% else %>
+          <%= t('activerecord.errors.template.header.other', count: @conference.errors.count) %>
+        <% end %>
+      </h3>
+
+      <ul class="list-group">
+      <% @conference.errors.full_messages.each do |msg| %>
+        <li class="list-group-item list-group-item-danger"><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4><%= t("#{context}.general_information.label") %></h4>
+    </div>
+    <div class="panel-body">
+      <div class="field form-group">
+        <div class="row">
+          <div class="col-lg-12">
+            <%= f.label :name, t("#{context}.general_information.name") %>
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      <div class="field form-group">
+        <div class="row">
+          <div class="col-lg-12">
+            <%= f.label :description, t("#{context}.general_information.description") %>
+            <%= f.text_area :description, rows: 4, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      <div class="field form-group">
+        <div class="row">
+          <div class="col-md-3">
+            <%= f.label :start_at, t("#{context}.general_information.from") %></br>
+            <% Time.use_zone(f.object.event.timezone || "UTC") do %>
+              <%= f.text_field :start_at, class: "form-control", value: f.object.start_at.try(:to_s, :default) %>
+            <% end %>
+          </div>
+          <div class="col-md-3">
+            <%= f.label :end_at, t("#{context}.general_information.to") %>
+            <% Time.use_zone(f.object.event.timezone || "UTC") do %>
+              <%= f.text_field :end_at, class: "form-control", value: f.object.end_at.try(:to_s, :default) %>
+            <% end %>
+          </div>
+          <div class="col-md-6">
+            <%= f.label :location_id, t("#{context}.location.label") %></br>
+            <% if @locations.size == 0 %>
+              <%= t("#{context}.location.empty") %>
+            <% else %>
+              <%= f.select :location_id, options_from_collection_for_select(@locations, 'id', 'name'), {}, class: "form-control" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading"><h4><%= t("#{context}.lecturers.subtitle") %></h4></div>
+    <div class="panel-body">
+      <%= f.nested_fields_for :lecturers do |lf| %>
+        <ul class="list-group">
+          <li class="list-group-item row">
+            <div class="form-group col-lg-2 ">
+              <%= lf.label :name, t("#{context}.lecturers.name") %>
+              <%= lf.text_field :name, class: "form-control" %>
+            </div>
+            <div class="form-group col-lg-4">
+              <%= lf.label :description, t("#{context}.lecturers.description") %>
+              <%= lf.text_field :description, class: "form-control" %>
+            </div>
+            <div class="form-group col-lg-3">
+              <%= lf.label :linkedin_url, t("#{context}.lecturers.linkedin_url") %>
+              <%= lf.text_field :linkedin_url, class: "form-control" %>
+            </div>
+            <div class="form-group col-lg-2">
+              <%= lf.label :country_code, t("#{context}.lecturers.country") %>
+              <% options = lf.object.country.present? ? {selected: lf.object.country.code} : {} %>
+              <%= lf.select :country_code, localized_country_options_for_select(options), {}, class: "form-control" %>
+              <%#= lf.select :country_id, options_from_collection_for_select(@countries, 'id', 'name'), {}, class: "form-control" %>
+            </div>
+            <div ><%= lf.remove_nested_fields_link t("#{context}.lecturers.delete")  %></div>
+          </li>
+        </ul>
+      <% end %>
+      <span class="btn btn-default btn-xs">
+        <%= f.add_nested_fields_link :lecturers, t("#{context}.lecturers.add") %>
+      </span>
+    </div>
+  </div>
+  <!--
+  <div class="panel panel-default">
+    <div class="panel-heading"><h4>Social</h4></div>
+    <div class="field form-group panel-body">
+      <div class="row">
+        <div class="col-lg-6">
+          <%= f.label :tag_list, "Twitter Hash Tag" %>
+          <div class="input-group col-lg-6">
+            <span class="input-group-addon">#</span>
+            <%= f.text_field :tag_list, class: "form-control" %>
+          </div>
+        </div>
+        </div>
+     </div>
+  </div>
+  -->
+  <div class="panel panel-default">
+    <div class="panel-heading"><h4><%= t("#{context}.settings.subtitle") %></h4></div>
+    <div class="panel-body">
+      <div class="field form-group">
+        <%= f.label :archived, t("#{context}.settings.draft") %>
+        <%= f.check_box :archived %>
+      </div>
+      <div class="field form-group">
+        <div class="row">
+          <div class="col-lg-6">
+            <%= f.label :embedded_url, t("#{context}.settings.presentation_url") %>
+            <%= f.text_field :embedded_url, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="actions">
+    <% if @conference.new_record? %>
+       <%= f.submit t("#{context}.submit.new"), class: "btn btn-primary"  %>
+       <%= link_to t("#{context}.submit.back"), organizers_event_path(@conference.event), class: "btn btn-danger" %>
+    <% else %>
+      <%= f.submit t("#{context}.submit.update"), class: "btn btn-success" %>
+      <!-- <%= f.submit t("#{context}.submit.edit"), class: "btn btn-primary"  %>  -->
+      <%= link_to t("#{context}.submit.cancel"), [:organizers, @conference], class: "btn btn-danger" %>
+    <% end %>
+
+  </div>
+<% end %>
+
+<div id="save-draft-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title"><%= t("#{context}.modal.title") %></h4>
+      </div>
+      <div class="modal-body">
+        <p><%= t("#{context}.modal.message") %></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><%= t("#{context}.modal.cancel_button") %></button>
+        <button id="save-draft-button" type="button" class="btn btn-primary"><%= t("#{context}.modal.ok_button") %></button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

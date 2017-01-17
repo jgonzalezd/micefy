@@ -1,0 +1,105 @@
+<% context = 'views.organizers.events.conferences.show'%>
+
+<div class="page-header row">
+
+  <div class="pull-left conference-title" >
+    <h1 ><%= @conference.name %></h1> 
+  </div>
+  <div class="pull-right start-presentation ">
+    <% if @conference.embedded_url.nil? || @conference.embedded_url.empty? %>
+      <button type="button" class="btn btn-success btn-lg" disabled="disabled" > <%= t("#{context}.start_presentation") %></button>
+      <div class="text-center"><%= t("#{context}.need_presentation") %></div>
+    <% else 
+        event_is_public = @event.published? 
+        if event_is_public %>
+          <%= link_to t("#{context}.start_presentation"), present_organizers_conference_path(@conference), class: "btn btn-success btn-lg" %>
+        <% else %>
+          <%= link_to t("#{context}.start_presentation"), "#", class: "btn btn-success btn-lg", disabled:"disabled" %><br/>
+          <%= t("#{context}.publish_to_present") unless event_is_public %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading"><h4><%= t("#{context}.general_information.subtitle") %></h4></div>
+  <div class="panel-body">
+    <div class="col-lg-5">
+      <h4><%= t("#{context}.general_information.location.label") %></h4>
+      <p>
+        <% if @conference.location.present? %>
+          <%= @conference.location.name %>
+        <% else %>
+          <%= t("#{context}.general_information.location.empty") %>
+        <% end %>
+      </p>
+    </div>
+    <div class="col-lg-7">
+      <h4><%= t("#{context}.general_information.time.label") %></h4>
+
+      <p><%= insert_date_of @conference, t("#{context}.general_information.time.missing") %></p>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading"><h4><%= t("#{context}.general_information.description.label") %></h4></div>
+  <div class="panel-body">
+    <% if @conference.description.empty? %>
+      <!-- FIXME: internationalize message -->
+      <%= t("#{context}.general_information.description.empty") %>
+    <% else %>
+      <p><%= @conference.description %></p>
+    <% end %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading"><h4><%= t("#{context}.lecturers.subtitle") %></h4></div>
+  <ul class="list-group">
+    <% if @conference.lecturers.empty? %>
+      <li class="list-group-item"><p><%= t("#{context}.lecturers.empty") %></p></li>
+    <% else %>
+      <% @conference.lecturers.each do |lecturer| %>
+        <li class="list-group-item">
+          <h4><%= lecturer.name %></h4>
+          <p><%= lecturer.description %></p>
+          <p>
+            <b><%= t("#{context}.lecturers.origin.label") %>: </b> 
+            <% if lecturer.country.nil? %>
+              <%= t("#{context}.lecturers.origin.not_present") %>
+            <% else %>
+              <%= lecturer.country.name %>
+            <% end %>
+          </p>
+          <p>
+            <% if lecturer.linkedin_url[/\Ahttp:\/\/\z/] %>
+              <%= t("#{context}.lecturers.linkedin_url.not_present") %>
+              <%= link_to t("#{context}.lecturers.linkedin_url.not_present_link_text") , edit_organizers_conference_path(@conference) %>
+            <% else %>
+              <%= link_to t("#{context}.lecturers.linkedin_url.present"), lecturer.linkedin_url, target: "_blank" %>
+            <% end %>
+          </p>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+<!-- 
+<h3>Twitter HashTag</h3>
+<% @conference.tag_list.each do |tag| %>
+ <p><%= "##{tag}" %></P>
+<% end %>
+<br/>  
+-->
+<%= link_to t("#{context}.edit_button") , edit_organizers_conference_path(@conference), class: "btn btn-primary btn-lg" %>
+<br/><br/>
+<%= link_to organizers_event_path(@event), class: "btn btn-info btn-sm" do %>
+  <span class="glyphicon glyphicon-arrow-left"> <%= t("#{context}.back") %></span>
+<% end %>
+
+
+
+
+
+

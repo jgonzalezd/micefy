@@ -1,0 +1,242 @@
+<% context = 'views.organizers.events.show'%>
+<% unless @event.published? %>
+  <div class="bg-warning">
+    <div class="row">
+      <div class="col-xs-6">
+        <p><%= t("#{context}.not_published") %></p>
+      </div>
+      <div class="col-xs-6">
+        <%= link_to t("#{context}.publish_button"), "#publish", class: "btn btn-success btn-lg pull-right", :"data-toggle" => "modal" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class="page-header row">
+  <div class="pull-left event-title" >
+    <h1 ><%= @event.name %></h1>
+  </div>
+  <div class="pull-right">
+    <% if @event.logo.blank? %>
+      <% placeholder_url= "http://placehold.it/270x90&text="+t("#{context}.logo.placeholder_message") %>
+      <%= link_to edit_organizers_event_path(@event) do%>
+        <%= image_tag(placeholder_url, class: "img-responsive", alt: "Upload Logo")%>
+      <% end %>
+    <% else %>
+      <%= image_tag(@event.logo.url, class: "img-responsive", alt: "Upload Logo" ) %>
+    <% end %>
+  </div>
+</div>
+
+
+<% if @event.in_time? %>
+  <div id="current-conferences" class="panel panel-primary">
+    <div class="panel-heading">
+      <h2 class="panel-title"><%= t("#{context}.current_conferences.title")%></h2>
+    </div>
+    <% if @current_conferences.length > 0 %>
+      <table class="table">
+        <% @current_conferences.each do |conference| %>
+          <tr>
+            <td>
+              <% if conference.in_time? %>  
+                <div class="pull-left">
+                  <h4 style="vertical-align: middle">
+                    <a ><%= link_to conference.name, organizers_conference_path(conference) %></a>
+                  </h4>
+                </div>
+                <div class="pull-right">
+                  <%= link_to( t("#{context}.current_conferences.present"), present_organizers_conference_path(conference), class: "btn btn-success" )  unless ( conference.embedded_url.nil? || conference.embedded_url.empty? || !@event.published? )  %>
+                  <%= link_to t("#{context}.current_conferences.questions"), questions_path(token: @event.token), class: "btn btn-success", target: "_blank", disabled: "disabled" if @event.may_publish? %>
+                </div>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <div class="panel-body" >
+        <%= t("#{context}.current_conferences.no_conferences_msg")%>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<h2><%= t("#{context}.information_subtitle") %></h2>
+<div class="panel panel-default">
+  <div class="panel-heading"><h4><%= t("#{context}.duration.subtitle")%></h4></div>
+  <div class="panel-body">
+    <% Time.use_zone(@event.timezone || "UTC") do %>
+      <% if @event.start_at.present? && @event.end_at.present? && @event.start_at.month == @event.end_at.month %>
+        <b><%= t("#{context}.duration.from")%></b>
+        <%= l @event.start_at.in_time_zone, format: :event_start_date_same_month %>
+        <b> <%= t("#{context}.duration.to")%></b>
+        <%= l @event.end_at.in_time_zone, format: :event_end_date_same_month %>
+      <% elsif @event.start_at.present? && @event.end_at.present? %>
+        <b><%= t("#{context}.duration.from")%></b>
+        <%= l @event.start_at.in_time_zone, format: :event_different_month %>
+        <br/>
+        <b> <%= t("#{context}.duration.to")%></b>
+        <%= l @event.end_at.in_time_zone, format: :event_different_month %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading"><h4><%= t("#{context}.description.subtitle")%></h4></div>
+  <div class="panel-body">
+    <%= @event.description %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading"><h4><%= t("#{context}.locations.subtitle")%></h4></div>
+  <ul class="list-group">
+   	<% @event.locations.each do |location| %>
+      <li class="list-group-item">
+        <span><%= "#{location.name}, #{location.address}" %></span>
+        <div>
+          <img src='<%= "http://maps.google.com/maps/api/staticmap?zoom=15&size=400x400&maptype=roadmap&markers=color:blue|label:S|#{location.latitude},#{location.longitude}" %>'>
+        </div>
+      </li>
+  	<% end %>
+  </ul>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading"><h4><%= t("#{context}.twitter.subtitle")%></h4></div>
+  <div class="panel-body">
+    <% if @event.tag_list.empty? %>
+      <%= t("#{context}.twitter.not_present")%>
+    <% else %>
+      <% @event.tag_list.each do |tag| %>
+        <%= "##{tag}" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading"><h4><%= t("#{context}.indications.subtitle")%></h4></div>
+  <table class="table">
+    <% if @event.indications.blank? %>
+      <div class="panel-body">
+        <%= t("#{context}.indications.not_present")%>
+      </div>
+    <% else %>
+      <% @event.indications.each do |indication| %>
+        <% case indication.kind %>
+          <% when "information" %>
+            <tr class="success">
+              <td><%= t("#{context}.indications.information")%></td>
+              <td><%= "#{indication.content}" %></td>
+            </tr>
+          <% when "warning" %>
+            <tr class="warning">
+              <td><%= t("#{context}.indications.warning")%></td>
+              <td><%= "#{indication.content}" %></td>
+            </tr>
+          <% when "regulatory" %>
+            <tr class="danger">
+              <td><%= t("#{context}.indications.regulatory")%></td>
+              <td><%= "#{indication.content}" %></td>
+            </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+  </table>
+</div>
+
+<%= link_to t("#{context}.edit_button"), edit_organizers_event_path(@event), class: "btn btn-primary btn-lg" %>
+<% if (@event.published?)%>
+  <%= button_to t(".publish_button", default: "Des-Publicar"), publish_organizers_event_path(@event) + "?publish=unpublish", class: "btn btn-danger btn-lg", method: :patch %>
+<% else %>
+<!--   <%= link_to t(".publish_button", default: "Publicar"), "#publish", class: "btn btn-success btn-lg", :"data-toggle" => "modal" %> -->
+  <div class="modal fade" id="publish">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title">Publicar</h4> <!-- TODO -->
+        </div>
+        <%= form_tag publish_organizers_event_path, method: :patch do %>
+          <div class="modal-body">
+            <%= hidden_field_tag :publish, "publish" %>
+            <%= label_tag :token %>
+            <%= text_field_tag :token %>
+            <br/>
+            <div class="clearfix">
+              <%= link_to t(".request_token", scope: "views"), new_event_code_request_path %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= submit_tag "Save Changes", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+<% end %>
+
+<hr/>
+
+
+<h2><%= t("#{context}.conferences_title")%></h2>
+<ul class="nav nav-tabs" id="conference-tabs">
+  <li class="<%= filter_active_tab("upcoming") %>">
+    <%= link_to t("#{context}.upcoming"), "?filter=upcoming#conference-tabs" %>
+  </li>
+  <li class="<%= filter_active_tab("previous") %>">
+    <%= link_to t("#{context}.previous"), "?filter=previous#conference-tabs" %>
+  </li>
+  <li class="<%= filter_active_tab("drafts") %>">
+    <%= link_to t("#{context}.drafts"), "?filter=drafts#conference-tabs" %>
+  </li>
+  <div>
+    <li class="pull-right">
+    <%= link_to t("#{context}.new"), new_organizers_conference_path(event_id: @event.id), class: "btn btn-primary btn-sm" %></li>
+  </div>
+</ul>
+<div class="list-group">
+  <% if @conferences.empty? %>
+    <div class="list-group-item">
+      <small><%= t("#{context}.not_conferences")%></small>
+    </div>
+  <% end %>
+  <% @conferences.each do |conference| %>
+    <div class="list-group-item">
+
+        <div class="col-10">
+          <div>
+          <h3 class="title-with-controls"><%= link_to conference.name, [:organizers, conference] %></h3>
+          <div class="controls">
+
+          <%= link_to edit_organizers_conference_path(conference), class: "action" do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+          <%= link_to [:organizers, conference], method: :delete, data: { confirm: 'Are you sure?' }, class: "action" do %>
+            <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+        </div>
+        </div>
+          <small class="clearfix">
+            <b><%=  t("#{context}.conferences_list.place.label") %>:</b>
+            <% if conference.location.present? %>
+              <%= "#{conference.location.name}, #{conference.location.address}"  %>
+            <% else %>
+              <%=  t("#{context}.conferences_list.place.empty") %>
+            <% end %>
+          </small>
+          <small>
+            <b><%=  t("#{context}.conferences_list.date.label") %>:</b>
+            <%= insert_date_of conference, t("#{context}.conferences_list.date.empty") %>
+          </small>
+      </div>
+    </div>
+  <% end %>
+  <br/>
+  <%= link_to organizers_events_path, class: "btn btn-info btn-sm" do%>
+    <span class="glyphicon glyphicon-arrow-left"> <%= t("#{context}.back") %></span>
+  <% end %>
+</div>

@@ -1,0 +1,28 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id           :integer          not null, primary key
+#  name         :string(255)
+#  description  :text
+#  created_at   :datetime
+#  updated_at   :datetime
+#  start_at     :datetime
+#  end_at       :datetime
+#  organizer_id :integer
+#  logo         :string(255)
+#  map_picture  :string(255)
+#  city_id      :integer
+#  status       :string(255)
+#  token        :string(255)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+
+two:
+  name: MyString
+  description: MyText

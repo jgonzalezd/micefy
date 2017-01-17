@@ -1,0 +1,120 @@
+- context = 'views.pages.landing'
+.fold.main
+  .container
+    .row
+      .col-sm-5.text-center
+        %img.featurette-image.img-responsive{src: asset_path("landing-image.png")}
+      .col-sm-7
+        %h2.featurette-heading
+          = t("#{context}.hero.title")
+        %p.lead
+          = t("#{context}.hero.text")
+        %p
+          = link_to "https://itunes.apple.com/us/app/micefy/id890719362" do
+            %img{src: asset_path("badge_ios.png")}
+          = link_to "https://play.google.com/store/apps/details?id=com.micefy" do
+            %img{src: asset_path("badge_android.png")}
+.fold.features
+  .container
+    .col-xs-4
+      .text-center
+        %img{src: asset_path("heart.png")}
+        %h3
+          = t("#{context}.features.feature_one.title")
+      %p
+        = t("#{context}.features.feature_one.text")
+      %ul
+        %li
+          = t("#{context}.features.feature_one.bullet_1")
+        %li
+          = t("#{context}.features.feature_one.bullet_2")
+        %li
+          = t("#{context}.features.feature_one.bullet_3")
+        %li
+          = t("#{context}.features.feature_one.bullet_4")
+    .col-xs-4
+      .text-center
+        %img{src: asset_path("location.png")}
+        %h3
+          = t("#{context}.features.feature_two.title")
+      %p
+        = t("#{context}.features.feature_two.text_1")
+      %p
+        = t("#{context}.features.feature_two.text_2")
+    .col-xs-4
+      .text-center
+        %img{src: asset_path("tag.png")}
+        %h3
+          = t("#{context}.features.feature_three.title")
+      %p
+        = t("#{context}.features.feature_three.text")
+.fold.real-time
+  .container
+    .col-xs-12
+      .text-center
+        %h3
+          = t("#{context}.real-time.title")
+        %h4
+          = t("#{context}.real-time.subtitle")
+        %p
+          = t("#{context}.real-time.text")
+        %a
+          %img{src: asset_path("real-time-slides.png")}
+.fold.organizer
+  .container
+    .row
+      .col-xs-5
+        .text-center
+          %img{src: asset_path("schedule.png")}
+      .col-xs-7
+        %h3
+          = t("#{context}.soon.feature_1.title")
+        %p
+          = t("#{context}.soon.feature_1.text")
+    .row
+      .col-xs-7
+        %h3
+          = t("#{context}.soon.feature_2.title")
+        %p
+          = t("#{context}.soon.feature_2.text_1")
+        %p
+          = t("#{context}.soon.feature_2.text_2")
+      .col-xs-5
+        .text-center
+          %img{src: asset_path("analytics.png")}
+  .text-center
+    %img{src: asset_path("line-shadow.png")}
+.fold.conference
+  .container
+    .row
+      .col-xs-12
+        .text-center
+          %h3
+            = t("#{context}.conference.title")
+          %img{src: asset_path("ischedule.png")}
+  .text-center
+    %img{src: asset_path("line-shadow.png")}
+.fold.contact
+  .container
+    .row
+      .col-xs-12
+        .text-center
+          %h3
+            = t("#{context}.contact_us.title")
+          %p
+            = t("#{context}.contact_us.text")
+        .text-center
+          %a{href: "http://facebook.com/micefy"}
+            %img{src: asset_path('facebook.png')}
+          %a
+            %img{src: asset_path('twitter.png')}
+          %a
+            %img{src: asset_path('linkedin.png')}
+  .text-center
+    %img{src: asset_path("line-shadow.png")}
+.fold.powered-by
+  .container
+    .row
+      .col-xs-12
+        .text-center
+          %img{src: asset_path('rackspace.png')}

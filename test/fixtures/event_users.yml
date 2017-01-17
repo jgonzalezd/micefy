@@ -1,0 +1,27 @@
+# == Schema Information
+#
+# Table name: event_users
+#
+#  event_id   :integer          default(0), not null
+#  user_id    :integer          default(0), not null
+#  rsvp       :string(255)
+#  invited    :boolean
+#  created_at :datetime
+#  updated_at :datetime
+#  checkin    :boolean
+#  id         :integer          not null, primary key
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  event_id: 
+  user_id: 
+  rsvp: MyString
+  invited: false
+
+two:
+  event_id: 
+  user_id: 
+  rsvp: MyString
+  invited: false

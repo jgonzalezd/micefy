@@ -1,0 +1,3 @@
+EventCodeRequestMailer#new_request
+
+Hi, find me in app/views/event_code_request_mailer/new_request

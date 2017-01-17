@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+  start_at: 2013-08-29 17:04:54
+  end_at: 2013-08-29 17:04:54
+
+two:
+  name: MyString
+  description: MyText
+  start_at: 2013-08-29 17:04:54
+  end_at: 2013-08-29 17:04:54
+
+# == Schema Information
+#
+# Table name: conferences
+#
+#  id            :integer          not null, primary key
+#  name          :string(255)
+#  description   :text
+#  start_at      :datetime
+#  end_at        :datetime
+#  event_id      :integer
+#  location_id   :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#  archived      :boolean
+#  embedded_url  :string(255)
+#  status        :string(255)
+#  current_step  :integer          default(1)
+#  steps         :integer
+#  security_hash :string(255)
+#
+

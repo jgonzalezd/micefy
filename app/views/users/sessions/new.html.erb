@@ -1,0 +1,45 @@
+<% context = 'views.users.sessions.new'%>
+<h2><%= t("#{context}.title")%></h2>
+<h4><%= t("#{context}.subtitle_html", href: link_to(t("#{context}.href_here"), new_organizer_session_path) )%></h4>
+
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <div class="field form-group">
+    <div class="row">
+      <div class="col-lg-6">
+        <%= f.label :email, t("#{context}.email") %>
+        <%= f.email_field :email, :autofocus => true, class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field form-group">
+    <div class="row">
+      <div class="col-lg-6">
+        <%= f.label :password, t("#{context}.password") %>
+        <%= f.password_field :password, class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+
+  <% if devise_mapping.rememberable? -%>
+    <div class="field form-group">
+      <div class="row">
+        <div class="col-lg-6">
+          <%= f.check_box :remember_me %> <%= f.label :remember_me, t("#{context}.remember_me") %>
+        </div>
+      </div>
+    </div>
+  <% end -%>
+
+  <div class="field form-group">
+    <div class="row">
+      <div class="col-lg-6">
+        <%= f.submit "Sign in", class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
+<%= render "users/shared/links" %>

@@ -1,0 +1,26 @@
+<h1>A conference presentation needs your attention!</h1>
+<% organizer_name = @conference.event.organizer.company_name %>
+<% organizer_id = @conference.event.organizer.id %>
+<% conference_name = @conference.name %>
+<% conference_id = @conference.id %>
+<% new_presentation = @conference.embedded_url %>
+<p>
+	Hey guys, sorry to bother but <strong> <%= organizer_name %> (id= <%= organizer_id %>) </strong> has just <%= @old_presentation.nil? ? "created" : "updated" %> the presentation for the conference: <strong> <%= conference_name %> (id= <%= conference_id %>) </strong> .
+</p>
+<p>
+	Would you mind to take a look?
+</p>
+<ul>
+	<li><strong>Organizer name:</strong><%= organizer_name %></li>
+	<li><strong>Organizer id:</strong><%= organizer_id %></li>
+	<li><strong>Conference name:</strong><%= conference_name %></li>
+	<li><strong>Conference id:</strong><%= conference_id %></li>
+	<% if @old_presentation.present? %>
+		<li><strong>Old presentation:</strong><%= @old_presentation %></li>
+	<% end %>
+	<li><strong>New presentation:</strong><%= new_presentation %></li>
+</ul>
+
+Thanks, 
+
+Your loyal Micefy app.

@@ -1,0 +1,17 @@
+<% context='views.organizers.passwords.edit' %>
+<h2><%= t("#{context}.title")%></h2>
+
+<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= devise_error_messages! %>
+  <%= f.hidden_field :reset_password_token %>
+
+  <div><%= f.label :password, t("#{context}.new_pass")%><br />
+  <%= f.password_field :password, :autofocus => true %></div>
+
+  <div><%= f.label :password_confirmation, t("#{context}.confirm_pass") %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+  <div><%= f.submit t("#{context}.submit") %></div>
+<% end %>
+
+<%= render "organizers/shared/links" %>

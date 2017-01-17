@@ -1,0 +1,142 @@
+// Place all the styles related to the pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+h1, h2, h3, h4, p, span, a{
+  font-family: 'Lato', sans-serif;
+}
+
+.navbar-brand{
+  h3{
+    margin-top: 0px;
+  }
+}
+
+.jumbotron{
+  background-color: #FFF;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.container{
+  width: 960px;
+}
+
+.navbar{
+  .container{
+    width: auto;
+  }
+}
+
+.fold.main{
+  .featurette-image{
+    margin: 0 auto;
+  }
+  .featurette-heading{
+    color: #fff;
+  }
+  p.lead{
+    font-family: lato, arial, sans-serif;
+    font-kerning: auto;
+    font-size: 14px;
+    font-style: normal;
+  }
+}
+#wrap{
+  .navbar{
+    min-height: 61px;
+  }
+  .fold{
+    .container{
+      padding-top: 50px;
+      padding-bottom: 50px;
+      h2{
+        font-size: 48px;
+      }
+      ul{
+        padding-left: 20px;
+      }
+      p, ul li{
+        color: #777777;
+      }
+    }
+    &.main{
+      background: image-url('herounit.jpg');
+      background-size: auto;
+      background-position: 49% 50%;
+      background-repeat: no-repeat;
+      .container p{
+        color: #FFFFFF;
+        font-size: 16px;
+      }
+    }
+    &.features .container{
+      h3{
+        color: #ff6622;
+      }
+      p{
+        text-align: justify;
+      }
+    }
+    &.real-time{
+      background: image-url('typing.jpg') no-repeat;
+      background-size: cover;
+      .container{
+        h3, h4, p{
+          color: #FFFFFF;
+        }
+        h3{
+          font-size: 46px;
+          margin-bottom: 24px;
+        }
+        h4{
+          font-size: 34px;
+        }
+      }
+    }
+    &.organizer{
+      .container{
+        img{
+          width: 260px;
+          margin-top: 18px;
+        }
+        h3{
+          color: #ff6622;
+        }
+      }
+    }
+    &.conference{
+      .container{
+        h3{
+          color: #ff6622;
+          font-size: 48px;
+          margin-bottom: 20px;
+        }
+      }
+    }
+    &.contact{
+      .container{
+        h3{
+          color: #ff6622;
+          font-size: 48px;
+          margin-bottom: 20px;
+        }
+        p{
+          margin-bottom: 20px;
+        }
+        a{
+          margin: 0 50px;
+          text-decoration: none;
+          img{
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    &.powered-by{
+      img{
+        width: 300px;
+      }
+    }
+  }
+}

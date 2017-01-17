@@ -1,0 +1,40 @@
+<% context = 'views.organizers.events.conferences.present'%>
+
+<div class="col-lg-12">
+  <div class="page-header">
+    <h1>
+      <%= t("#{context}.title") %>
+    </h1>
+  </div>
+  <div id="setup-step-1" class="panel panel-default">
+    <div class="panel-body">
+        <div id="installed-tcca" class="hide">
+          <div class="alert alert-success" role="alert">
+            <span class="glyphicon glyphicon-ok"> 
+              <%= t("#{context}.message_success_html") %>    
+            </span>
+          </div>
+          <% if @conference.embedded_url %>
+            <%= link_to presentation_url(@conference), id: "vendor-presentation", :class=> "btn btn-primary btn-lg", :role=>"button", :target => "_blank"  do %>
+              <span><%= t("#{context}.start_presentation_btn") %> »</span>
+            <% end %>
+          <% else %>
+            Well, this is weird! you shouldn't have reached this point. Please go back and add a presentation to your conference.
+          <% end %>
+        </div>
+        <div id="install-tcca">
+          <div class="alert alert-danger" role="alert">
+            <%= t("#{context}.message_fail_html") %>    
+          </div>
+          <p>
+            <%= t("#{context}.instructions_failure") %> 
+          </p>
+          <a href="https://chrome.google.com/webstore/detail/micefy-presentations/hgnaaldedphdldjbkadmkgnhcmlinlfg" class="btn btn-primary btn-default" role="button" target="_blank">
+            <%= t("#{context}.install_btn") %> 
+          </a>
+        </div>
+    </div>
+  </div>
+  <%= link_to "back", organizers_conference_path(@conference) %>
+</div>
+

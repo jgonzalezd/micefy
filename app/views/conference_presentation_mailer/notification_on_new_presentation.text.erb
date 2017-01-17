@@ -1,0 +1,26 @@
+======A conference presentation needs your attention!=====
+<% organizer_name = @conference.event.organizer.company_name %>
+<% organizer_id = @conference.event.organizer.id %>
+<% conference_name = @conference.name %>
+<% conference_id = @conference.id %>
+<% new_presentation = @conference.embedded_url %>
+
+----
+Hey guys, sorry to bother but  <%= organizer_name %> (id= <%= organizer_id %>) has just <%= @old_presentation.nil? ? "created" : "updated" %> the presentation for the conference: <%= conference_name %> (id= <%= conference_id %>).
+
+Would you mind to take a look?
+---
+***************** params ******************
+* Organizer name: <%= organizer_name %>
+* Organizer id: <%= organizer_id %>
+* Conference name: <%= conference_name %>
+* Conference id: <%= conference_id %>
+<% if @old_presentation.present? %>
+* Old presentation: <%= @old_presentation %>
+<% end %>
+* New presentation: <%= new_presentation %>
+*******************************************
+
+Thanks, 
+
+Your loyal Micefy app.

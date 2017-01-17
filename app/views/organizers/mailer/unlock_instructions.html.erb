@@ -1,0 +1,8 @@
+<% context='views.organizers.mailer.unlock_instructions' %>
+<p><% t("#{context}.greeting") %><%= @resource.email %>!</p>
+
+<p><%= t("#{context}.text") %></p>
+
+<p><%= t("#{context}.text2") %></p>
+
+<p><%= link_to t("#{context}.link"), unlock_url(@resource, :unlock_token => @resource.unlock_token) %></p>

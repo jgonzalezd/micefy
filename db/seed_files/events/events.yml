@@ -1,0 +1,130 @@
+0:
+  name:        'Congreso CIDEU en Medellín'
+  logo:        'logos/event0.png'
+  description: 'Del 3 al 5 de abril del 2014, se celebrará en Medellín (Colombia) el XXI congreso de CIDEU. El lema del congreso será "Ciudades para la vida". que será un encuentro estratégico de intercambio entre los representantes de diversas ciudades.'
+  city:        'Medellín'
+  map:         'maps/event0.png'
+  locations:
+    0:
+      name:    'Parque Biblioteca Belén'
+      address: 'Carrera 76 Nº 18A 19'
+      city:    'Medellín'
+    1:
+      name:    'Ruta N'
+      address: 'Calle 67 Nº 52-20'
+      city:    'Medellín'
+    2:
+      name:    'Edificio Inteligente EPM'
+      address: 'Carrera 58 42-125'
+      city:    'Medellín'
+  start_date:  '06-09-2014 08:00 AM'
+  end_date:    '11-09-2014 08:00 PM'
+  indications:
+    0:
+      description: 'Parque Biblioteca Belén - La arquitectura del Parque Biblioteca Belén, son 15 edificaciones de un solo nivel a doble altura, articuladas en tres grandes espacios públicos, sobre la Cra 76 se localiza la plaza de las personas, en el centro del proyecto la plaza del agua y sobre la Cra. 80 la plaza verde.'
+      kind:        'information'
+    1:
+      description: 'Ruta N - Es el centro de innovación y negocios de Medellín, una corporación creada por la alcaldía de Medellín, UNE y EPM para promover el desarrollo de negocios innovadores basados en tecnología, que incrementen la competitividad de la ciudad y de la región. Ubicado en el Barrio Sevilla, entre las calles Barranquilla, Ferrocarril y Carabobo, es hoy un ejemplo de arquitectura y un ícono moderno de la ciudad competitiva e innovadora por la que se está trabajando desde la Administración Pública.'
+      kind:        'information'
+    2:
+      description: 'El Edificio EPM está localizado entre la Avenida del Río y la carrera 58, sector conocido como La Alpujarra II, contiguo a las instalaciones del Teatro Metropolitano y el Palacio de Exposiciones y Convenciones. Es otro aporte a la ciudad en espacios amables, agradables y de gran riqueza visual. Promueve el desarrollo urbano de la zona por el manejo del espacio público y la disposición de áreas libres, zonas verdes y espejos de agua.'
+      kind:        'information'
+    3:
+      description: 'Para cambiar dinero, es preferible ir a un banco o a una oficina de cambio reconocida, ubicadas generalmente en los centros comerciales.'
+      kind:        'warning'
+    4:
+      description: 'Las ciudades activas miembros de CIDEU cuentan con dos plazas de hotel para sus representantes. Los demás representantes de ciudades activas de CIDEU y los de otras ciudades no miembros de CIDEU, deberán asumir los costes del alojamiento.'
+      kind:        'warning'
+  twitter_hashtag: 'CIDEU2014'
+  lecturers:
+    0:
+      name:        'Pedro Acebillo'
+      description: 'Coordinador General de CIDEU'
+      linkedin:    ''
+      country:     ''
+    1:
+      name:        'Otro Lecturer'
+      description: 'Coordinador General de NADA'
+      linkedin:    ''
+      country:     ''
+  conferences:
+    0:
+      name:            'Ciudades para la Vida: Reflexiones desde Barcelona a Medellín'
+      description:     ''
+      start_date:  '06-09-2014 08:00 AM'
+      end_date:    '11-09-2014 08:00 PM'
+      location:        0
+      lecturers:       [0, 1]
+      twitter_hashtag: 'CIDEU2014Reflex'
+      archived:        false
+      presentation:    ''
+    1:
+      name:            'Conferencia 2: Reflexiones desde Barcelona a Medellín'
+      description:     ''
+      start_date:  '06-09-2014 08:00 AM'
+      end_date:    '11-09-2014 08:00 PM'
+      location:        0
+      lecturers:       [0, 1]
+      twitter_hashtag: 'CIDEU2014Reflex'
+      archived:        false
+      presentation:    ''
+1:
+  name:        'Congreso CIDEU en Medellín 2'
+  logo:        'logos/event0.png'
+  description: 'Del 3 al 5 de abril del 2014, se celebrará en Medellín (Colombia) el XXI congreso de CIDEU. El lema del congreso será "Ciudades para la vida". que será un encuentro estratégico de intercambio entre los representantes de diversas ciudades.'
+  city:        'Medellín'
+  map:         'maps/event0.png'
+  locations:
+    0:
+      name:    'Parque Biblioteca Belén'
+      address: 'Carrera 76 Nº 18A 19'
+      city:    'Medellín'
+    1:
+      name:    'Ruta N'
+      address: 'Calle 67 Nº 52-20'
+      city:    'Medellín'
+    2:
+      name:    'Edificio Inteligente EPM'
+      address: 'Carrera 58 42-125'
+      city:    'Medellín'
+  start_date:  '06-09-2014 08:00 AM'
+  end_date:    '11-09-2014 08:00 PM'
+  indications:
+    0:
+      description: 'Parque Biblioteca Belén - La arquitectura del Parque Biblioteca Belén, son 15 edificaciones de un solo nivel a doble altura, articuladas en tres grandes espacios públicos, sobre la Cra 76 se localiza la plaza de las personas, en el centro del proyecto la plaza del agua y sobre la Cra. 80 la plaza verde.'
+      kind:        'information'
+    1:
+      description: 'Ruta N - Es el centro de innovación y negocios de Medellín, una corporación creada por la alcaldía de Medellín, UNE y EPM para promover el desarrollo de negocios innovadores basados en tecnología, que incrementen la competitividad de la ciudad y de la región. Ubicado en el Barrio Sevilla, entre las calles Barranquilla, Ferrocarril y Carabobo, es hoy un ejemplo de arquitectura y un ícono moderno de la ciudad competitiva e innovadora por la que se está trabajando desde la Administración Pública.'
+      kind:        'information'
+    2:
+      description: 'El Edificio EPM está localizado entre la Avenida del Río y la carrera 58, sector conocido como La Alpujarra II, contiguo a las instalaciones del Teatro Metropolitano y el Palacio de Exposiciones y Convenciones. Es otro aporte a la ciudad en espacios amables, agradables y de gran riqueza visual. Promueve el desarrollo urbano de la zona por el manejo del espacio público y la disposición de áreas libres, zonas verdes y espejos de agua.'
+      kind:        'information'
+    3:
+      description: 'Para cambiar dinero, es preferible ir a un banco o a una oficina de cambio reconocida, ubicadas generalmente en los centros comerciales.'
+      kind:        'warning'
+    4:
+      description: 'Las ciudades activas miembros de CIDEU cuentan con dos plazas de hotel para sus representantes. Los demás representantes de ciudades activas de CIDEU y los de otras ciudades no miembros de CIDEU, deberán asumir los costes del alojamiento.'
+      kind:        'warning'
+  twitter_hashtag: 'CIDEU2014'
+  lecturers:
+    0:
+      name:        'Pedro Acebillo'
+      description: 'Coordinador General de CIDEU'
+      linkedin:    ''
+      country:     ''
+    1:
+      name:        'Otro Lecturer'
+      description: 'Coordinador General de NADA'
+      linkedin:    ''
+      country:     ''
+  conferences:
+    0:
+      name:            'Ciudades para la Vida: Reflexiones desde Barcelona a Medellín'
+      description:     ''
+      start_date:  '06-09-2014 08:00 AM'
+      end_date:    '11-09-2014 08:00 PM'
+      location:        0
+      lecturers:       [0, 1]
+      twitter_hashtag: 'CIDEU2014Reflex'
+      archived:        false
+      presentation:    ''

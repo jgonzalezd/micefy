@@ -1,0 +1,213 @@
+<% context = 'views.organizers.events.form'%>
+<% content_for :scripts do %>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+<% end %>
+<%= form_for([:organizers, @event], multipart: true) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h3 class="alert alert-danger">
+        <% if @event.errors.count == 1 %>
+          <%= t('activerecord.errors.template.header.one') %>
+        <% else %>
+          <%= t('activerecord.errors.template.header.other', count: @event.errors.count) %>
+        <% end %>
+      </h3>
+
+      <ul class="list-group">
+      <% @event.errors.full_messages.each do |msg| %>
+        <li class="list-group-item list-group-item-danger"><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.hidden_field :timezone %>
+
+  <div class="panel panel-default">
+    <div class="panel-heading"><h4><%= t("#{context}.general_info.subtitle") %></h4></div>
+    <div class="panel-body">
+      <div class="field form-group">
+        <div class="row">
+          <div class="col-lg-12">
+            <%= f.label :name, t("#{context}.general_info.name") %>
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      <div class="field form-group">
+        <div class="row">
+          <div class="col-lg-12">
+            <%= f.label :description, t("#{context}.general_info.description") %>
+            <%= f.text_area :description, rows: 3, class: "form-control", maxlength: 500 %>
+          </div>
+        </div>
+      </div>
+      <div class="field form-group">
+        <div class="row">
+          <div class="col-lg-4">
+            <%= f.label :logo, t("#{context}.general_info.logo") %>
+            <%= f.file_field :logo, class: "form-control" %>
+          </div>
+          <div class="col-lg-4">
+            <%= f.label :tag_list, "Twitter Hash Tag" %>
+            <div class="input-group col-lg-6">
+              <span class="input-group-addon">#</span>
+              <%= f.text_field :tag_list, class: "form-control" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading"><h4><%= t("#{context}.venues.title") %></h4></div>
+    <div class="panel-body">
+    <%= f.nested_fields_for :locations do |lf| %>
+      <ul class="list-group">
+        <li class="list-group-item row location">
+          <div class="col-xs-1">
+            <a class="btn btn-md btn-primary map-selector" data-toggle="modal" data-target="#place-selector">
+              <span class="glyphicon glyphicon-map-marker"></span>
+            </a>
+          </div>
+          <div class="col-sm-5">
+            <%= lf.label :name, t("#{context}.venues.name") %>
+            <%= lf.text_field :name, class: "form-control" %>
+          </div>
+          <div class="col-sm-5">
+            <%= lf.label :address, t("#{context}.venues.address") %>
+            <%= lf.text_field :address, class: "form-control" %>
+          </div>
+          <%= lf.hidden_field :latitude %>
+          <%= lf.hidden_field :longitude %>
+          <%= lf.hidden_field :id %>
+          <div class="col-sm-1">
+            <%= lf.remove_nested_fields_link t("#{context}.indications.delete") %>
+          </div>
+        </li>
+      </ul>
+    <% end %>
+    <div id="conferences-default-location-modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">Asignar lugar?</h4>
+          </div>
+          <div class="modal-body">
+            Deseas que las conferencias existentes tomen por lugar asignado el lugar agregado?
+          </div>
+          <div class="modal-footer">
+            <button id="conferences-default-location-not-set" type="button" class="btn btn-default">No</button>
+            <button id="conferences-default-location-set" type="button" class="btn btn-primary">Si</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= f.hidden_field :set_location_to_all_confs, value: false  %>
+    <div id="place-selector" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Mapa</h4>
+          </div>
+          <div class="modal-body">
+            <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
+            <div id="map-canvas"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="btn btn-default btn-xs"> <%= f.add_nested_fields_link :locations, t("#{context}.venues.add_new") %></div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading"><h4><%= t("#{context}.date.title")%></h4></div>
+    <div class="panel-body">
+      <div class="field form-group">
+        <div class="row">
+        <!-- the form will break if an empty string is passed to Time.use_zone  it happens when the form
+        is rendered after an error prevents saving it. However it works for nil (as when rendered for a new event)
+        -->
+          <% f.object.timezone = nil if !f.object.timezone.nil? && f.object.timezone.empty? %>
+          <% Time.use_zone(f.object.timezone) do %>
+            <div class="col-md-5">
+                <%= f.label :start_at, t("#{context}.date.start") %></br>
+                <% if f.object.start_at.blank? %>
+                  <%= f.text_field :start_at, class: "form-control" %>
+                <% else %>
+                  <%= f.text_field :start_at, class: "form-control", value: f.object.start_at.in_time_zone.try(:to_s, :default) %>
+                <% end %>
+            </div>
+            <div class="col-md-5">
+              <%= f.label :end_at, t("#{context}.date.end") %>
+              <% if f.object.start_at.blank? %>
+                <%= f.text_field :end_at, class: "form-control" %>
+              <% else %>
+                <%= f.text_field :end_at, class: "form-control", value: f.object.end_at.in_time_zone.try(:to_s, :default) %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <div id="warning-location-date">
+          You need to set up a location first <!-- TODO -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading"><h4><%= t("#{context}.indications.subtitle") %></h4></div>
+    <div class="panel-body">
+      <%= f.nested_fields_for :indications do |lf| %>
+        <ul class="list-group">
+          <li class="list-group-item row">
+            <div class="col-lg-6">
+              <%= lf.label :content, t("#{context}.indications.content") %>
+              <%= lf.text_area :content, rows: 3, class: "form-control" %>
+            </div>
+            <div class="col-md-3">
+              <%= lf.label :kind, t("#{context}.indications.kind.label") %>
+              <%= lf.select :kind, options_for_select(
+                [["#{t("#{context}.indications.kind.information")}", 'information'],
+                ["#{t("#{context}.indications.kind.warning")}",'warning'],
+                ["#{t("#{context}.indications.kind.regulatory")}",'regulatory']], selected: lf.object.kind),
+                {}, {class: "form-control"} %>
+            </div>
+            <div><%= lf.remove_nested_fields_link t("#{context}.indications.delete") %></div>
+          </li>
+        </ul>
+      <% end %>
+      <div class="btn btn-default btn-xs"><%= f.add_nested_fields_link :indications, t("#{context}.indications.add_new") %></div>
+    </div>
+  </div>
+  <!--
+  <div class="panel panel-default">
+    <div class="panel-heading"><h4><%= t("#{context}.social.title")%></h4></div>
+    <div class="panel-body">
+      <div class="field form-group">
+        <div class="row">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  -->
+  <div class="actions">
+    <% if @event.new_record? %>
+       <%= f.submit t("#{context}.submit.new"), class: "btn btn-primary"  %>
+       <%= link_to t("#{context}.submit.back"), organizers_events_path(), class: "btn btn-danger" %>
+    <% else %>
+       <%= f.submit t("#{context}.submit.update"), class: "btn btn-success"  %>
+       <%= link_to t("#{context}.submit.cancel"), [:organizers, @event], class: "btn btn-danger" %>
+    <% end %>
+  </div>
+
+<% end %>

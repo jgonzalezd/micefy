@@ -1,0 +1,99 @@
+<% context = 'views.organizers.events.index'%> <h2><%= t("#{context}.title") %></h2>
+<% if @current_events.present? %>
+  <div id="current-conferences" class="panel panel-primary">
+     <div class="panel-heading">
+      <h3 class="panel-title"><%= t("#{context}.current") %></h3>
+    </div>
+    <div class="panel-body" >
+      <% if @current_events.length > 0 %>
+        <% @current_events.each do |cevent| %>
+          <div class="pull-left">
+            <h4 style="vertical-align: middle">
+             <a ><%= link_to cevent.name, organizers_event_path(cevent) %></a>
+            </h4>
+          </div>
+        <% end %>
+      <% else %>
+        <%= t("#{context}.current_conferences.no_conferences_msg")%>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+
+<ul class="nav nav-tabs">
+
+	<li class="<%= filter_active_tab("upcoming") %>">
+		<%= link_to t("#{context}.upcoming"), "?filter=upcoming" %>
+	</li>
+	<li class="<%= filter_active_tab("previous") %>">
+		<%= link_to t("#{context}.previous"), "?filter=previous" %>
+	</li>
+	<li class="<%= filter_active_tab("drafts") %>">
+		<%= link_to t("#{context}.drafts"), "?filter=drafts" %>
+	</li>
+	<li class="pull-right">
+		<%= button_to t("#{context}.create_event"), new_organizers_event_path, :method => :get, class: "btn btn-primary btn-sm" %>
+	</li>
+
+</ul>
+<div class="list-group">
+	<% if @events.empty? %>
+	<div class="list-group-item">
+		<small><%= t("#{context}.no_events") %> </small>
+	</div>
+	<% end %>
+	<% @events.each do |event| %>
+	<% location = event.locations.first %>
+	<div class="list-group-item">
+		<div class="row">
+			<div class="col-10 event-record">
+				<div>
+					<h2 class="title-with-controls"><%= link_to event.name, [:organizers, event] %></h2>
+					<div class="controls">
+						<% link_to [:organizers, event], class: "action" do %>
+						<span class="glyphicon glyphicon-eye-open"></span>
+						<% end %>
+						<%= link_to edit_organizers_event_path(event), class: "action" do %>
+						<span class="glyphicon glyphicon-pencil"></span>
+						<% end %>
+						<%= link_to_unless (event.past? || event.in_time?), "", [:organizers, event], method: :delete, data: { confirm: 'Are you sure?' }, class: "action glyphicon glyphicon-remove"  %>
+					</div>
+				</div>
+				<div>
+					<b><%= t("#{context}.place.label") %>:</b>
+					<% if location.nil? || location.name.empty? %>
+						<%= t("#{context}.place.empty") %>
+					<% else %>
+						<%= "#{location.name}" %>
+						<%= ", #{location.address}" unless location.address.empty? %>
+					<% end %>
+				</div>
+				<div>
+					<% Time.use_zone(event.timezone) do %>
+						<% if event.start_at.nil? || event.end_at.nil? %>
+							<b><%= t("#{context}.event_date.label") %>:</b>
+							<%= t("#{context}.event_date.empty")%>
+						<% else %>
+							<% if event.start_at.in_time_zone.month == event.end_at.in_time_zone.month %>
+							  <b><%= t("#{context}.date.from")%></b>
+							  <%= l event.start_at.in_time_zone, format: :event_start_date_same_month %>
+							  <b> <%= t("#{context}.date.to")%></b>
+							  <%= l event.end_at.in_time_zone, format: :event_end_date_same_month %>
+							<% else %>
+							  <b><%= t("#{context}.date.from")%></b>
+							  <%= l event.start_at.in_time_zone, format: :event_different_month %>
+							  <br/>
+							  <b> <%= t("#{context}.date.to")%></b>
+							  <%= l event.end_at.in_time_zone, format: :event_different_month %>
+							<% end %>
+						<% end %>
+					<% end %>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+	<% end %>
+</div>

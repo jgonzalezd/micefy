@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  number: 1
+  code: MyString
+  picture: MyString
+  references: 
+
+two:
+  number: 1
+  code: MyString
+  picture: MyString
+  references:
+
+# == Schema Information
+#
+# Table name: slides
+#
+#  id            :integer          not null, primary key
+#  number        :integer
+#  code          :string(255)
+#  picture       :string(255)
+#  conference_id :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
